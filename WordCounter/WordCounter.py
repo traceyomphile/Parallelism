@@ -1,27 +1,79 @@
 """
-Count the total number of words in a file or in a directory.
+Count the total number of real words in a file or in a directory.
 Author: Tracey Letlape
 Date: 27 November 2025
 """
 
 import os
+import re
 import multiprocessing
 from typing import LiteralString
+from PyPDF2 import PdfReader
+import docx
+from bs4 import BeautifulSoup
+from PIL import Image
+import pytesseract
 
-def _form_file_path(path: list[str]) -> LiteralString:
-    """
-    Form a file path from the given list.
-    Parameters:
-        path: A list representing each section of the file path.
-    Returns:
-        A LiteralString representing a file path.
-    """
-    file_path = path[0]
 
-    for i in range(1, len(path)):
-        file_path = os.path.join(file_path, path[i])
+def _read_pdf(file_path: str) -> str:
+    text = []
+    try:
+        reader = PdfReader(file_path)
+        for page in reader.pages:
+            extracted = page.extract_text() or ""
+            text.append(extracted)
+    except Exception:
+        pass
+    return "\n".join(text)
+
+def _read_docx(file_path: str) -> str:
+    try:
+        document = docx.Document(file_path)
+        return "\n".join([p.text for p in document.paragraphs])
+    except Exception:
+        return ""
     
-    return file_path
+def _read_html(file_path: str) -> str:
+    try:
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+            soup = BeautifulSoup(f.read(), "html.parser")
+            return soup.get_text(separator=" ")
+    except Exception:
+        return ""
+    
+def _read_image(file_path: str) -> str:
+    try:
+        img = Image.open(file_path)
+        return pytesseract.image_to_string(img)
+    except Exception:
+        return ""
+    
+def _read_plain(file_path: str) -> str:
+    try:
+        with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+            return f.read()
+    except Exception:
+        return ""
+    
+def _extract_text(file_path: str) -> str:
+    lower = file_path.lower()
+
+    if lower.endswith(".pdf"):
+        return _read_pdf(file_path)
+    if lower.endswith(".docx"):
+        return _read_docx(file_path)
+    if lower.endswith((".html", ".htm")):
+        return _read_html(file_path)
+    if lower.endswith((".png", ".jpg", ".jpeg")):
+        return _read_image(file_path)
+    if lower.endswith((".txt", ".md")):
+        return _read_plain(file_path)
+    
+    # For anything readable
+    if not _is_binary(file_path):
+        return _read_plain(file_path)
+    
+    return ""
 
 def _get_file_paths(directory_path: str) -> list:
     """
@@ -77,27 +129,12 @@ def _read_and_count(file_path: str) -> int:
     Returns:
         A int representing the number of words in that file.
     """
-    word_count = 0
-    # Skip binary files
-    if _is_binary(file_path):
-        return word_count
-    with open(file_path, 'r', encoding='UTF-8') as f:
-        lines = f.readlines()
-    return _count_words(lines)
+    text = _extract_text(file_path)
+    tokens = text.split()
 
-def _count_words(file_lines: list[str]) -> int:
-    """
-    Count the number of words in a list.
-    Parameters:
-        file_lines: A list of strings representing lines of a file.
-    Returns:
-        An int representing the number of words in a file.
-    """
-    word_count = 0
-    for line in file_lines:
-        temp = line.split()
-        word_count += len(temp)
-    return word_count
+    clean_words = [t for t in tokens if re.search(f"[A-Za-z]", t)]
+
+    return len(clean_words)
 
 def word_counter(path: str) -> int:
     """
@@ -108,28 +145,29 @@ def word_counter(path: str) -> int:
         An int representing the number of words in the given path.
     """
     if os.path.isfile(path):
+        print("here")
         return _read_and_count(path)
     
     total_words = 0
+    print("\nGetting files....")
     file_paths = _get_file_paths(path)
     with multiprocessing.Pool(processes=os.cpu_count()) as pool:
         counts = pool.map(_read_and_count, file_paths)
         total_words = sum(counts)
-
+    print("\nDone! Counting words...")
     return total_words
 
 def main():
-    path = input("Enter the path for the file or directory you want:\n")
-    
-    if path.__contains__("/"):
-        temp = path.split("/")
-    else:
-        temp = path.split("\\")
-
-    file_path = _form_file_path(temp)
+    """Example usage!"""
+    file_path = input("Enter the path for the file or directory you want:\n")
 
     if not os.path.exists(file_path):
+        print()
         print(f"File path {file_path} doesn't exist.\nTotal number of words: 0")
 
     words = word_counter(file_path)
+    print()
     print(f"Total number of words in {file_path}: {words}")
+
+if __name__ == '__main__':
+    main()
