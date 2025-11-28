@@ -1,6 +1,6 @@
 /**
  * Compute f(x) for given x values and given polynomial coefficients
- * @author Tracey Letlape
+ * @author @traceyomphile
  * Date: 28 November 2011
  */
 import java.util.Scanner;
