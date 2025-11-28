@@ -16,6 +16,15 @@ class PolynomialEvaluator:
 
     @staticmethod
     def _eval(x: float, pol_coeffs: list[float], results: dict) -> None:
+        """
+        Compute f(x) for the given x, and write the result to results dict
+        Parameters:
+            x: A float representing an x value to be evaluated
+            pol_coeffs: A list of floats representing polynomial coefficients
+            results: A dictionary storing different f of x_values
+        Returns:
+            None
+        """
         if x in results:
             return
         
@@ -26,7 +35,9 @@ class PolynomialEvaluator:
         results[x] = res
 
     def main(self) -> dict:
-        
+        """
+        Computes the f(x) for different x values in parallel.
+        """
         with Manager() as manager:
             shared_results = manager.dict()
 
@@ -36,6 +47,13 @@ class PolynomialEvaluator:
             return dict(shared_results)
     
 def _convert_to_float_list(input: list[str]) -> list[float]:
+    """
+    Convert a string list to a float list.
+    Parameters:
+        input: A list of strings
+    Returns:
+        A list of floating-point numbers
+    """
     res = []
     for i in range(len(input)):
         res.append(float(input[i]))
