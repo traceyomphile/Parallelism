@@ -24,6 +24,7 @@ try
         return;
     }
 
+    /** Get x-values from user:
     Console.WriteLine("Enter x-values to evaluate the polynomial at, separated by spaces:");
     input = Console.ReadLine();
 
@@ -34,6 +35,18 @@ try
     }
 
     temp = input!.Split(' ');
+    double[] xValues;
+    */
+
+    // Getting x-values from user-file
+    Console.WriteLine("Enter the path to the file containing x-values:");
+    input = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(input) || !File.Exists(input))
+    {
+        Console.WriteLine("Enter a valid file path containing x-values:");
+        input = Console.ReadLine();
+    }
+    temp = File.ReadAllText(input!).Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
     double[] xValues;
 
     try
