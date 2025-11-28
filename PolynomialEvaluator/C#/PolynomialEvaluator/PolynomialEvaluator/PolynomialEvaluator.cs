@@ -4,9 +4,6 @@
  * @Date: 2025-11-28
  */
 
-using System;
-using System.Threading.Tasks;
-
 public class PolynomialEvaluator
 {
     private readonly double[] polCoeffs;
@@ -39,22 +36,5 @@ public class PolynomialEvaluator
             }
             this.y_values[i] = result;
         });
-    }
-
-    /** Converts an array of strings to an array of doubles.
-     * Throws FormatException if any string cannot be converted.
-     */
-    private static double[] ConvertToDoubleArray(string[] input)
-    {
-        double[] result = new double[input.Length];
-
-        for (int i = 0; i < input.Length; i++)
-        {
-            if (!double.TryParse(input[i], out result[i]))
-            {
-                throw new FormatException($"Input should consist of real numbers!");
-            }
-        }
-        return result;
     }
 }
