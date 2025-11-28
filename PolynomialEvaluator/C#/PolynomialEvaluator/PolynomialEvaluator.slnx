@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="PolynomialEvaluator/PolynomialEvaluator.csproj" />
+  <Project Path="PolynomialEvaluatorSerial/PolynomialEvaluatorSerial.csproj" Id="d78f0727-df29-4cb6-854b-c582d7ba9a5b" />
 </Solution>

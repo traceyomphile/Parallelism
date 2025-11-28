@@ -48,20 +48,20 @@ try
 
     Stopwatch stopwatch = Stopwatch.StartNew();
 
-    PolynomialEvaluator polEvaluator = new PolynomialEvaluator(coeffs, xValues);
+    PolynomialEvaluatorSerial polEvaluator = new PolynomialEvaluatorSerial(coeffs, xValues);
     polEvaluator.EvaluatePolynomial();
 
     double[] results = polEvaluator.Y_Values;
 
     stopwatch.Stop();
-
+    
     Console.WriteLine();
     for (int i = 0; i < xValues.Length; i++)
     {
         Console.WriteLine($"f({xValues[i]}) = {results[i]}");
     }
 
-    Console.WriteLine($"\nTime taken: {stopwatch.ElapsedMilliseconds} ms");
+    Console.WriteLine($"Time taken (serial): {stopwatch.ElapsedMilliseconds} ms");
 }
 catch (Exception e)
 {
