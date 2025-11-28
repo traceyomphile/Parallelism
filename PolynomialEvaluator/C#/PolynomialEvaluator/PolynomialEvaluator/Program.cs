@@ -49,6 +49,7 @@
 
     double[] results = polEvaluator.Y_Values;
 
+    Console.WriteLine();
     for (int i = 0; i < xValues.Length; i++)
     {
         Console.WriteLine($"f({xValues[i]}) = {results[i]}");
