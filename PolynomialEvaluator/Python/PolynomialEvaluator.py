@@ -5,6 +5,7 @@ Date: 28 November 2025
 """
 
 import multiprocessing
+from multiprocessing import Manager
 import os
 
 
@@ -12,26 +13,32 @@ class PolynomialEvaluator:
     def __init__(self, pol_coeffs: list[float], x_values: list[float]):
         self._pol_coeffs: list[float] = pol_coeffs
         self._x_values: list[float] = x_values
-        self._results: dict = None
 
-    def _eval(self, x: float) -> None:
-        if x in self._results:
+    @staticmethod
+    def _eval(x: float, pol_coeffs: list[float], results: dict) -> None:
+        if x in results:
             return
-        len = len(self._pol_coeffs)
+        
+        length = len(pol_coeffs)
         res = 0
-        for i in range(len):
-            res += self._pol_coeffs[i] * (x ** (len - 1 - i))
-        self._results[x] = res
+        for i in range(length):
+            res += pol_coeffs[i] * (x ** (length - 1 - i))
+        results[x] = res
 
     def main(self) -> dict:
-        with multiprocessing.Pool(processes=os.cpu_count()) as pool:
-            pool.map(self._eval, self._x_values)
-        return self._results
+        
+        with Manager() as manager:
+            shared_results = manager.dict()
+
+            with multiprocessing.Pool(processes=os.cpu_count()) as pool:
+                eval_args = [(x, self._pol_coeffs, shared_results) for x in self._x_values]
+                pool.starmap(PolynomialEvaluator._eval, eval_args)
+            return dict(shared_results)
     
 def _convert_to_float_list(input: list[str]) -> list[float]:
     res = []
     for i in range(len(input)):
-        res[i] = float(input[i])
+        res.append(float(input[i]))
     return res
 
 def main():
@@ -49,9 +56,17 @@ def main():
     x_values = _convert_to_float_list(user_in.split())
 
     polEvaluator = PolynomialEvaluator(coeffs, x_values)
-    results:dict = polEvaluator.main()
+    final_res = polEvaluator.main()
 
-    for x in results:
-        print(f"f({x}) = {results[x]}")
+    if not final_res:
+        print("Result dictionary is empty!!")
+    else:
+        print()
+        for x in final_res:
+            print(f"f({x}) = {final_res[x]}")
+
+if __name__ == '__main__':
+    multiprocessing.freeze_support()
+    main()
 
         
