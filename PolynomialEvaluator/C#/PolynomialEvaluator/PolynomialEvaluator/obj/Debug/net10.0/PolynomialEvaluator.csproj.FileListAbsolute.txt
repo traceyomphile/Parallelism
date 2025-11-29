@@ -1,0 +1,15 @@
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\bin\Debug\net10.0\PolynomialEvaluator.exe
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\bin\Debug\net10.0\PolynomialEvaluator.deps.json
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\bin\Debug\net10.0\PolynomialEvaluator.runtimeconfig.json
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\bin\Debug\net10.0\PolynomialEvaluator.dll
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\bin\Debug\net10.0\PolynomialEvaluator.pdb
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.AssemblyInfoInputs.cache
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.AssemblyInfo.cs
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.csproj.CoreCompileInputs.cache
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.sourcelink.json
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.dll
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\refint\PolynomialEvaluator.dll
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.pdb
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\PolynomialEvaluator.genruntimeconfig.cache
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluator\obj\Debug\net10.0\ref\PolynomialEvaluator.dll

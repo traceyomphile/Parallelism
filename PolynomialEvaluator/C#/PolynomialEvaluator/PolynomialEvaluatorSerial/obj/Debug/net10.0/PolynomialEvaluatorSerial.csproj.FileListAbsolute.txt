@@ -1,0 +1,15 @@
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\bin\Debug\net10.0\PolynomialEvaluatorSerial.exe
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\bin\Debug\net10.0\PolynomialEvaluatorSerial.deps.json
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\bin\Debug\net10.0\PolynomialEvaluatorSerial.runtimeconfig.json
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\bin\Debug\net10.0\PolynomialEvaluatorSerial.dll
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\bin\Debug\net10.0\PolynomialEvaluatorSerial.pdb
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.AssemblyInfoInputs.cache
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.AssemblyInfo.cs
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.csproj.CoreCompileInputs.cache
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.sourcelink.json
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.dll
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\refint\PolynomialEvaluatorSerial.dll
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.pdb
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\PolynomialEvaluatorSerial.genruntimeconfig.cache
+C:\Users\trace\Personal\Projects\Parallelism\PolynomialEvaluator\C#\PolynomialEvaluator\PolynomialEvaluatorSerial\obj\Debug\net10.0\ref\PolynomialEvaluatorSerial.dll
