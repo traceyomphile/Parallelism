@@ -1,5 +1,5 @@
 /**
- * Compute f(x) for given x values and given polynomial coefficients in parallel
+ * Compute f(x) for given x values and given polynomial coefficients in serial
  * @author @traceyomphile
  * Date: 28 November 2011
  */
@@ -11,61 +11,29 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.RecursiveAction;
 
-public class PolynomialEvaluator extends RecursiveAction {
+public class PolynomialEvaluatorSerial {
     private final double[] polCoeffs;
     private final double[] x_values;
     private final double[] res;
-    private static double THRESHOLD;
-    private int start, end;
 
-    public PolynomialEvaluator(double[] polCoeffs, double[] x_values) {
-        this(polCoeffs, x_values, new double[x_values.length], 0, x_values.length, Math.max((x_values.length * 0.10), 1));
-    }
-
-    public PolynomialEvaluator(double[] polCoeffs, double[] x_values, double[] res, int start, int end, double threshold) {
+    public PolynomialEvaluatorSerial(double[] polCoeffs, double[] x_values) {
         this.polCoeffs = polCoeffs;
         this.x_values = x_values;
-        this.res = res;
-        this.start = start;
-        this.end = end;
-        PolynomialEvaluator.THRESHOLD = threshold;
+        this.res = new double[x_values.length];
     }
 
     /**
-     * Compute the f(x) for the x values in the given range.
-     * @param start: represents the starting index of the range.
-     * @param end: represents the ending index of the range.
+     * Compute the f(x) for all x values.
      */
-    public void eval(int start, int end) {
+    public void eval() {
         int len = this.polCoeffs.length;
 
-        for (int i = start; i < end; i++) {
+        for (int i = 0; i < this.x_values.length; i++) {
             double result = 0;
             for (int j = 0; j < len; j++) {
                 result += (this.polCoeffs[j] * Math.pow(this.x_values[i], (len - 1 - j)));
             } this.res[i] = result; 
-        }
-    }
-
-    /**
-     * Implement the main computation performed by PolynomialEvaluator tasks.
-     */
-    @Override
-    protected void compute() {
-        if ((this.end - this.start) <= PolynomialEvaluator.THRESHOLD) {
-            eval(this.start, this.end);
-        } else {
-            int mid = (this.end + this.start) / 2;
-
-            PolynomialEvaluator left = new PolynomialEvaluator(this.polCoeffs, this.x_values, this.res, this.start, mid, PolynomialEvaluator.THRESHOLD);
-            PolynomialEvaluator right = new PolynomialEvaluator(this.polCoeffs, this.x_values, this.res, mid, this.end, PolynomialEvaluator.THRESHOLD);
-
-            left.fork();
-            right.compute();
-            left.join();
         }
     }
 
@@ -156,16 +124,15 @@ public class PolynomialEvaluator extends RecursiveAction {
 
             Instant start = Instant.now();
 
-            ForkJoinPool pool = ForkJoinPool.commonPool();
-            PolynomialEvaluator polEvaluator = new PolynomialEvaluator(coeffs, xValues);
-            pool.invoke(polEvaluator);
+            PolynomialEvaluatorSerial polEvaluator = new PolynomialEvaluatorSerial(coeffs, xValues);
+            polEvaluator.eval();
 
             Instant end = Instant.now();
             for (int i = 0; i < polEvaluator.res.length; i++) {
                 System.out.println("f(" + polEvaluator.x_values[i] + ") = " + polEvaluator.res[i]);
             }
 
-            System.out.println("Time taken (parallel): " + Duration.between(start, end).toMillis() + " ms");
+            System.out.println("Time taken (serial): " + Duration.between(start, end).toMillis() + " ms");
         }
     }
 }

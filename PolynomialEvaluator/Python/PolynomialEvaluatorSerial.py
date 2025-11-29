@@ -1,5 +1,5 @@
 """
-Compute f(x) of the given x values with the given polynomial coefficients in parallel
+Compute f(x) of the given x values with the given polynomial coefficients in serial
 --- IGNORE ---
 @traceyomphile
 Date: 29 November 2025
@@ -7,11 +7,10 @@ Date: 29 November 2025
 
 import multiprocessing
 from multiprocessing import Manager
-import os
 import time
 
 
-class PolynomialEvaluator:
+class PolynomialEvaluatorSerial:
     def __init__(self, pol_coeffs: list[float], x_values: list[float]):
         self._pol_coeffs: list[float] = pol_coeffs
         self._x_values: list[float] = x_values
@@ -38,15 +37,12 @@ class PolynomialEvaluator:
 
     def main(self) -> dict:
         """
-        Computes the f(x) for different x values in parallel.
+        Computes the f(x) for different x values in serial.
         """
-        with Manager() as manager:
-            shared_results = manager.dict()
-
-            with multiprocessing.Pool(processes=os.cpu_count()) as pool:
-                eval_args = [(x, self._pol_coeffs, shared_results) for x in self._x_values]
-                pool.starmap(PolynomialEvaluator._eval, eval_args)
-            return dict(shared_results)
+        _results: dict = {}
+        for x in self._x_values:
+            self._eval(x, self._pol_coeffs, _results)
+        return _results
     
 def _convert_to_float_list(input: list[str]) -> list[float]:
     """
@@ -76,7 +72,7 @@ def main():
     x_values = _convert_to_float_list(user_in.split())
 
     start_time = time.perf_counter()
-    polEvaluator = PolynomialEvaluator(coeffs, x_values)
+    polEvaluator = PolynomialEvaluatorSerial(coeffs, x_values)
     final_res = polEvaluator.main()
     end_time = time.perf_counter()
 
