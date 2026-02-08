@@ -7,6 +7,10 @@
 
 package MatrixMultiplication.Java;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Random;
+
 public class MatrixMultSerial {
     private final double[][] matrixA;
     private final double[][] matrixB;
@@ -52,20 +56,35 @@ public class MatrixMultSerial {
         return task.result;
     }
 
+    /**
+     * Randomly initialise a given matrix
+     * @param matrix: Represents any matrix
+     * @return The randomly initialised matrix
+     */
+    private static double[][] randomInit(double[][] matrix) {
+        Random rand = new Random();
+
+        for (double[] matrix1 : matrix) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix1[j] = rand.nextDouble();
+            }
+        }
+        return matrix;
+    }
+
     // Example usage
     public static void main(String[] args) {
-        double[][] A = {
-            {1, 2, 3},
-            {4, 5, 6}
-        };
+        double[][] A = new double[50][40];
+        double[][] B = new double[40][50];
 
-        double[][] B = {
-            {7, 8},
-            {9, 10},
-            {11, 12}
-        };
+        A = randomInit(A);
+        B = randomInit(B);
 
+        Instant start = Instant.now();
         double[][] C = MatrixMultSerial.multiply(A, B);
+        Instant end = Instant.now();
+
+        Duration timeElapsed = Duration.between(start, end);
 
         // Print the result
         for (double[] row : C) {
@@ -74,5 +93,7 @@ public class MatrixMultSerial {
             }
             System.out.println();
         }
+
+        System.out.println("Time taken (serial): " + timeElapsed.toMillis() + " ms.");
     }
 }

@@ -7,6 +7,9 @@
 
 package MatrixMultiplication.Java;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Random;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
@@ -48,7 +51,7 @@ public class MatrixMult extends RecursiveTask<double[][]> {
         }
 
         // Split in half
-        int mid = (this.rowStart + nuRows) / 2;
+        int mid = (this.rowStart + rowEnd) / 2;
 
         MatrixMult left = new MatrixMult(this.matrixA, this.matrixB, this.result, this.rowStart, mid, this.THRESHOLD);
         MatrixMult right = new MatrixMult(this.matrixA, this.matrixB, this.result, mid, this.rowEnd, this.THRESHOLD);
@@ -95,21 +98,36 @@ public class MatrixMult extends RecursiveTask<double[][]> {
         return pool.invoke(task);
     }
 
+    /**
+     * Randomly initialise a given array
+     * @param matrix: Represents any matrix
+     * @return The randomly initialised matrix
+     */
+    private static double[][] randomInit(double[][] matrix) {
+        Random rand = new Random();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = rand.nextDouble();
+            }
+        } return matrix;
+    }
+
     // Example usage
     public static void main(String[] args) {
-        double[][] A = {
-            {1, 2, 3},
-            {4, 5, 6}
-        };
+        double[][] A = new double[50][40];
+        double[][] B = new double[40][50];
 
-        double[][] B = {
-            {7, 8},
-            {9, 10},
-            {11, 12}
-        };
+        A = randomInit(A);
+        B = randomInit(B);
 
+        Instant start = Instant.now();
         double[][] C = MatrixMult.multiply(A, B);
+        Instant end = Instant.now();
 
+        Duration timeElapsed = Duration.between(start, end);
+
+        /**
         // Print the result
         for (double[] row : C) {
             for (double val : row) {
@@ -117,5 +135,8 @@ public class MatrixMult extends RecursiveTask<double[][]> {
             }
             System.out.println();
         }
+        */
+
+        System.out.println("Time take (parallel): " + timeElapsed.toMillis() + " ms.");
     }
 }
